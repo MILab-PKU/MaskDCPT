@@ -4,8 +4,6 @@
 
 MILab, Peking University
 
-### TL;DR
-
 ---
 
 🚀️🚀️ **News:**
@@ -14,7 +12,7 @@ MILab, Peking University
 
 **TODO-lists:**
 
-- [ ] Release the train scipts.
+- [ ] Release the train scripts.
 
 ## Abstract
 
@@ -72,7 +70,7 @@ git clone https://github.com/MILab-PKU/MaskDCPT.git
 cd MaskDCPT
 ```
 
-You also can create a new environment to avoid conflicts:
+You can also create a new environment to avoid conflicts:
 
 ```
 conda env create -f environment.yml
@@ -83,7 +81,7 @@ conda activate maskdcpt
 
 ### Test
 
-Download [**pretrained models**](), and put them in `./pretrained_models`.
+Download [**pretrained models**](https://huggingface.co/Jiakui/MaskDCPT), and put them in `./pretrained_models`.
 
 To reproduce the results in our paper, please modify the dataset path and model path, then run:
 
