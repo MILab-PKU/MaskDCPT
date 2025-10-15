@@ -1,0 +1,434 @@
+name: NAFNet_12d_syn&real_local
+suffix: ~  # add suffix to saved images
+model_type: SRModel
+scale: 1
+crop_border: 0  # crop border when evaluation. If None, crop the scale pixels
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+eval_lpips: true
+
+# dataset and data loader settings
+datasets:
+  test_1971:
+    name: GaussianDenoise50_CBSD68
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/CBSD68
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 50
+  test_1972:
+    name: GaussianDenoise50_Kodak
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Kodak
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 50
+  test_1973:
+    name: GaussianDenoise50_McMasterHQ
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/McMasterHQ
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 50
+  test_1974:
+    name: GaussianDenoise50_Urban100
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 50
+  test_1981:
+    name: GaussianDenoise25_CBSD68
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/CBSD68
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 25
+  test_1982:
+    name: GaussianDenoise25_Kodak
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Kodak
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 25
+  test_1983:
+    name: GaussianDenoise25_McMasterHQ
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/McMasterHQ
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 25
+  test_1984:
+    name: GaussianDenoise25_Urban100
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 25
+  test_1991:
+    name: GaussianDenoise15_CBSD68
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/CBSD68
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 15
+  test_1992:
+    name: GaussianDenoise15_Kodak
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Kodak
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 15
+  test_1993:
+    name: GaussianDenoise15_McMasterHQ
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/McMasterHQ
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 15
+  test_1994:
+    name: GaussianDenoise15_Urban100
+    type: PairedImageDenoiseDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+    sigma_type: constant
+    sigma_range: 15
+  test_1111:
+    name: RealNoise_SIDD
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/uformer_test/SIDD/val/groundtruth
+    dataroot_lq: /mnt/nasv3/hjk/uformer_test/SIDD/val/input
+    io_backend:
+      type: disk
+  test_21:
+    name: MotionDeblur_GoPro
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/uformer_dataset/GoPro/test/groundtruth
+    dataroot_lq: /mnt/nasv3/hjk/uformer_dataset/GoPro/test/input
+    io_backend:
+      type: disk
+  test_22:
+    name: MotionDeblur_REDS
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DeblurDataset/REDS/val/val_sharp
+    dataroot_lq: /mnt/nasv3/hjk/DeblurDataset/REDS/val/val_blur
+    io_backend:
+      type: disk
+  test_23:
+    name: MotionDeblur_HIDE
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/uformer_test/HIDE/test/groundtruth
+    dataroot_lq: /mnt/nasv3/hjk/uformer_test/HIDE/test/input
+    io_backend:
+      type: disk
+  test_24:
+    name: MotionDeblur_RealBlurJ
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DeblurDataset/test/RealBlur_J/target
+    dataroot_lq: /mnt/nasv3/hjk/DeblurDataset/test/RealBlur_J/input
+    io_backend:
+      type: disk
+  test_25:
+    name: MotionDeblur_RealBlurR
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DeblurDataset/test/RealBlur_R/target
+    dataroot_lq: /mnt/nasv3/hjk/DeblurDataset/test/RealBlur_R/input
+    io_backend:
+      type: disk
+  test_26:
+    name: MotionDeblur_RSBlur_real
+    type: PairedImageTxtlistDataset
+    dataroot: [/mnt/nasv3/hjk/DeblurDataset/RSBlur]
+    txt_lists: [/mnt/nasv3/hjk/DeblurDataset/RSBlur/RSBlurList/RSBlur_real_test.txt]
+    datasets_balance: [1]
+    io_backend:
+      type: disk
+  test_31:
+    name: DefocuseDeblur_DPDD
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DefocusDeblurDataset/test/target
+    dataroot_lq: /mnt/nasv3/hjk/DefocusDeblurDataset/test/inputC
+    io_backend:
+      type: disk
+  test_32:
+    name: DefocuseDeblur_RealDOF
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DefocusDeblurDataset/RealDOF/target
+    dataroot_lq: /mnt/nasv3/hjk/DefocusDeblurDataset/RealDOF/source
+    io_backend:
+      type: disk
+  test_41:
+    name: JPEG_CBSD68
+    type: PairedImageJPEGCARDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/CBSD68
+    io_backend:
+      type: disk
+    q_type: constant
+    q_range: 50
+  test_42:
+    name: JPEG_Kodak
+    type: PairedImageJPEGCARDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Kodak
+    io_backend:
+      type: disk
+    q_type: constant
+    q_range: 50
+  test_43:
+    name: JPEG_McMasterHQ
+    type: PairedImageJPEGCARDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/McMasterHQ
+    io_backend:
+      type: disk
+    q_type: constant
+    q_range: 50
+  test_44:
+    name: JPEG_Urban100
+    type: PairedImageJPEGCARDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+    q_type: constant
+    q_range: 50
+  test_51:
+    name: Dehaze_SOTS
+    type: PairedImageDehazeDataset
+    dataroot_gt: /mnt/nasv3/hjk/DehazeDataset/SOTS/outdoor/gt
+    dataroot_lq: /mnt/nasv3/hjk/DehazeDataset/SOTS/outdoor/hazy
+    io_backend:
+      type: disk
+    suffix: .png
+  test_61:
+    name: Derain_Rain100L
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/test/Rain100L/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/test/Rain100L/input
+    io_backend:
+      type: disk
+  test_62:
+    name: Derain_Rain100H
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/test/Rain100H/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/test/Rain100H/input
+    io_backend:
+      type: disk
+  test_63:
+    name: Derain_Test100
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/test/Test100/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/test/Test100/input
+    io_backend:
+      type: disk
+  test_64:
+    name: Derain_Test1200
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/test/Test1200/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/test/Test1200/input
+    io_backend:
+      type: disk
+  test_65:
+    name: Derain_Test2800
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/test/Test2800/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/test/Test2800/input
+    io_backend:
+      type: disk
+  test_66:
+    name: Derain_SynRain
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/SynRain-13k/test/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/SynRain-13k/test/input
+    io_backend:
+      type: disk
+  test_67:
+    name: Derain_RealRainL
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/RealRain-1k/RealRain-1k-L/test/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/RealRain-1k/RealRain-1k-L/test/input
+    io_backend:
+      type: disk
+  test_68:
+    name: Derain_RealRainH
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/RealRain-1k/RealRain-1k-H/test/target
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/RealRain-1k/RealRain-1k-H/test/input
+    io_backend:
+      type: disk
+  test_71:
+    name: Snow_Snow100K-S
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-S/gt
+    dataroot_lq: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-S/synthetic
+    io_backend:
+      type: disk
+  test_72:
+    name: Snow_Snow100K-M
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-M/gt
+    dataroot_lq: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-M/synthetic
+    io_backend:
+      type: disk
+  test_73:
+    name: Snow_Snow100K-L
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-L/gt
+    dataroot_lq: /mnt/nasv3/hjk/DesnowDataset/Snow100K/media/jdway/GameSSD/overlapping/test/Snow100K-L/synthetic
+    io_backend:
+      type: disk
+  test_74:
+    name: Snow_CSD
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DesnowDataset/CSD/Test/Gt
+    dataroot_lq: /mnt/nasv3/hjk/DesnowDataset/CSD/Test/Snow
+    io_backend:
+      type: disk
+  test_81:
+    name: Mosaic_Urban100
+    type: PairedImageMosaicDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+  test_91:
+    name: LowLight_LoLv1
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/LowLightDataset/lol_v1_eval/high
+    dataroot_lq: /mnt/nasv3/hjk/LowLightDataset/lol_v1_eval/low
+    io_backend:
+      type: disk
+  test_92:
+    name: LowLight_LoLv2Syn
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/LowLightDataset/LOLv2/Synthetic/Test/Normal
+    dataroot_lq: /mnt/nasv3/hjk/LowLightDataset/LOLv2/Synthetic/Test/Low
+    io_backend:
+      type: disk
+  test_93:
+    name: LowLight_LoLv2Real
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/LowLightDataset/LOLv2/Real_captured/Test/Normal
+    dataroot_lq: /mnt/nasv3/hjk/LowLightDataset/LOLv2/Real_captured/Test/Low
+    io_backend:
+      type: disk
+  test_94:
+    name: LowLight_LSRW_Huawei
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/LowLightDataset/LSRW/Eval/Huawei/high
+    dataroot_lq: /mnt/nasv3/hjk/LowLightDataset/LSRW/Eval/Huawei/low
+    io_backend:
+      type: disk
+  test_95:
+    name: LowLight_LSRW_Nikon
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/LowLightDataset/LSRW/Eval/Nikon/high
+    dataroot_lq: /mnt/nasv3/hjk/LowLightDataset/LSRW/Eval/Nikon/low
+    io_backend:
+      type: disk
+  test_101:
+    name: Moire
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DemoireDataset/raw_moire_image_dataset/testset/gt_RGB
+    dataroot_lq: /mnt/nasv3/hjk/DemoireDataset/raw_moire_image_dataset/testset/moire_RGB
+    io_backend:
+      type: disk
+  test_111:
+    name: RainDrop_a
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DeRainDropDataset/raindrop_data/test_a/gt
+    dataroot_lq: /mnt/nasv3/hjk/DeRainDropDataset/raindrop_data/test_a/data
+    io_backend:
+      type: disk
+  test_112:
+    name: RainDrop_b
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DeRainDropDataset/raindrop_data/test_b/gt
+    dataroot_lq: /mnt/nasv3/hjk/DeRainDropDataset/raindrop_data/test_b/data
+    io_backend:
+      type: disk
+  test_113:
+    name: RainDS_syn
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/RainDS/RainDS/RainDS_syn/test/gt
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/RainDS/RainDS/RainDS_syn/test/raindrop
+    io_backend:
+      type: disk
+  test_114:
+    name: RainDS_real
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/DerainDataset/RainDS/RainDS/RainDS_real/test_set/gt
+    dataroot_lq: /mnt/nasv3/hjk/DerainDataset/RainDS/RainDS/RainDS_real/test_set/raindrop
+    io_backend:
+      type: disk
+  test_121:
+    name: GaussianBlur_Urban100
+    type: PairedImageGaussianBlurDataset
+    dataroot_gt: /mnt/nasv3/hjk/drformer/datasets/denoise/test/Urban100
+    io_backend:
+      type: disk
+    kernel_list: ['iso', 'aniso', 'generalized_iso', 'generalized_aniso', 'plateau_iso', 'plateau_aniso']
+    kernel_prob: [0.45, 0.25, 0.12, 0.03, 0.12, 0.03]
+    sinc_prob: 0.1
+    blur_sigma: [0.2, 3]
+    betag_range: [0.5, 4]
+    betap_range: [1, 2]
+  test_9991:
+    name: UDC_poled
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/UDCDataset/poled_test/gt
+    dataroot_lq: /mnt/nasv3/hjk/UDCDataset/poled_test/display
+    io_backend:
+      type: disk
+  test_9992:
+    name: UDC_toled
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nasv3/hjk/UDCDataset/toled_test/gt
+    dataroot_lq: /mnt/nasv3/hjk/UDCDataset/toled_test/display
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: NAFNetBaseline
+  width: 64
+  enc_blk_nums: [1, 1, 1, 28]
+  middle_blk_num: 1
+  dec_blk_nums: [1, 1, 1, 1]
+  window_size: 16 
+
+path:
+  pretrain_network_g: pretrained_models/nafnet_maskdcpt_12d.pth
+  param_key_g: params_ema
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+      image_range: 1.0
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false
+      image_range: 1.0
+    nrmse:
+      type: calculate_nrmse
+      crop_border: 0
+      better: lower
+      test_y_channel: false
+      image_range: 1.0

@@ -1,0 +1,1 @@
+python basicsr/test.py -opt options/all_in_one/test/test_NAFNet_12d.yml
